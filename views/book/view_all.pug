@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+    h3 Books
+    table
+        thead
+            tr
+                th Title
+                th Publisher
+                th Genre
+                th Page Numbers
+                th Image
+                th Description
+                th
+        tbody
+            each book in books
+                tr
+                    td= book.title
+                    td= book.publisher
+                    td= book.genre
+                    td= book.pagenumbers
+                    td= book.image
+                    td= book.description
+                    td
+                        a(href=`/books/profile/${book.id}`) View Book

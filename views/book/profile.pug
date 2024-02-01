@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+    h3= book.title
+    a(href=`/books/edit/${book.id}`) Edit Book
+    div
+        p Publisher : #{book.publisher}
+        p Genre : #{book.genre}
+        p Page Numebers : #{book.pagenumbers}
+        p Image : #{book.image}
+        p= book.description
