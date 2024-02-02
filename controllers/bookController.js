@@ -25,6 +25,17 @@ module.exports.renderAddForm = function(req, res){
 }
 
 //add
+module.exports.addBook = async function(req, res){
+    const book = await Book.create({
+        title: req.body.title,
+        publisher: req.body.publisher,
+        genre: req.body.genre,
+        pagenumbers: req.body.pagenumbers,
+        image: req.body.image,
+        description: req.body.description
+    });
+    res.redirect(`/books/profile/${book.id}`);
+}
 
 //render edit form
 module.exports.renderEditForm = async function(req, res){
@@ -50,3 +61,11 @@ module.exports.updateBook = async function(req, res){
 }
 
 //delete
+module.exports.deleteBook = async function(req, res){
+    await Book.destroy({
+        where: {
+            id:req.params.id
+        }
+        });
+    res.redirect('/books')
+}
