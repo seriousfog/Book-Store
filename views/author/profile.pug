@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+
+    a(href=`/authors/edit/${author.id}`) Edit Author
+    a(href=`/authors/delete/${author.id}`) Delete Author
+    div
+        h3 Name: #{author.first_name} #{author.last_name}
+        p Books Written: #{author.books_written}
+        p DOB: #{author.dob}
+    h4 Author Books
+    if availableBooks.length>0
+        form(action=`/authors/${author.id}/enroll/` method='post')
+            select(name='book' id='book' autocomplete=off)
+                each book in availableBooks
+                    option(value=book.id) #{book.title}
+            button.button.primary(type='submit') Enroll
+    else
+        p No more books are for these authors!
+    h4 Books Enlisted
+    if author.books.length >0
+        table
+            thead
+                tr
+                    th First
+                    th Last
+                    th Books Written
+                    th DOB
+                    th
+            tbody
+                each book in author.books
+                    tr
+                        td= author.first_name
+                        td= author.last_name
+                        td= author.books_written
+                        td= author.dob
+                        td
+                            a(href=`/books/profile/${book.id}`) View Book
+                            a(href=`/authors/${author.id}/removeBook/${book.id}`) Remove
+    else
+        p Author has not yet have a book
