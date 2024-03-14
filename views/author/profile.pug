@@ -13,27 +13,33 @@ block content
         form(action=`/authors/${author.id}/enroll/` method='post')
             select(name='book' id='book' autocomplete=off)
                 each book in availableBooks
-                    option(value=book.id) #{book.title}
+                    option(value= book.id) #{book.title}
             button.button.primary(type='submit') Enroll
     else
         p No more books are for these authors!
+
     h4 Books Enlisted
     if author.books.length >0
         table
             thead
                 tr
-                    th First
-                    th Last
-                    th Books Written
-                    th DOB
+                    th Title
+                    th Publisher
+                    th Genre
+                    th Page Numbers
+                    th Image
+                    th Description
                     th
             tbody
                 each book in author.books
                     tr
-                        td= author.first_name
-                        td= author.last_name
-                        td= author.books_written
-                        td= author.dob
+                        td= book.title
+                        td= book.publisher
+                        td= book.genre
+                        td= book.pagenumbers
+                        td
+                            img(src=book.image)
+                        td= book.description
                         td
                             a(href=`/books/profile/${book.id}`) View Book
                             a(href=`/authors/${author.id}/removeBook/${book.id}`) Remove
