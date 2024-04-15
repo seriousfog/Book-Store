@@ -4,16 +4,31 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    nav
-      div.school-title Brooklyn's Big Books (BBB)
 
-      div.nav-content
-        ul
-          li
-            a(href="/books") Books
-          li
-            a(href="/authors") Authors
-      div
-    div.container
-      div.content-container
-    block content
+    nav
+      div.container
+
+        h3 Brooklyn's Big Books (BBB)
+        ul.nav.justify-content-end.main-nav
+          if user
+            if user.can('view homepage')
+              li.nav-item
+                a.nav-link(href="/") Homepage
+            if user.can('view authors')
+              li.nav-item
+                a.nav-link(href="/authors") Author
+            if user.can('view books')
+              li.nav-item
+                a.nav-link(href="/books") Books
+            li.nav-item
+              a.nav-link(href="/profile") Hello #{user.first_name}
+            li.nav-item
+              a.nav-link(href="/logout") Logout
+          else
+            li.nav-item
+              a.nav-link(href="/login") Login
+            li.nav-item
+              a.nav-link(href="/register") Register
+
+      div.container
+        block content
